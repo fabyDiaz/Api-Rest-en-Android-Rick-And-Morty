@@ -1,5 +1,6 @@
 package com.example.rickandmorty.presentation.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,31 +10,45 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.rickandmorty.R
 import com.example.rickandmorty.data.model.Personaje
+import com.example.rickandmorty.databinding.PersonajeItemBinding
 
-class PersonajeAdapter(private val personajes: MutableList<Personaje>) : RecyclerView.Adapter<PersonajeAdapter.PersonajeViewHolder>() {
+class PersonajeAdapter() : RecyclerView.Adapter<PersonajeAdapter.PersonajeViewHolder>() {
 
-    inner class PersonajeViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val characterImage: ImageView = view.findViewById(R.id.character_image)
-        val txtName: TextView = view.findViewById(R.id.txt_name)
-        val txtSpecie: TextView = view.findViewById(R.id.txt_specie)
-        val txtGender: TextView = view.findViewById(R.id.txt_gender)
+    var personajes = mutableListOf<Personaje>()
+    lateinit var onItemClickListener: (Personaje) -> Unit
+
+    inner class PersonajeViewHolder(private var bindingItem: PersonajeItemBinding)
+        : RecyclerView.ViewHolder(bindingItem.root) {
+        fun bind(personaje: Personaje) {
+            with(personaje) {
+                Glide.with(bindingItem.characterImage).load(personaje.image).centerCrop().into(bindingItem.characterImage)
+                bindingItem.txtName.text = personaje.name
+                bindingItem.txtSpecie.text = personaje.species
+                bindingItem.txtGender.text = personaje.gender
+            }
+
+            bindingItem.root.setOnClickListener {
+                if (::onItemClickListener.isInitialized) {
+                    onItemClickListener(personaje)
+                } else {
+                    Log.e("Adapter", "Listener not initialized")
+                }
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PersonajeViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.personaje_item, parent, false)
-        return PersonajeViewHolder(view)
+        val bindingItem = PersonajeItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return PersonajeViewHolder(bindingItem)
     }
 
     override fun onBindViewHolder(holder: PersonajeViewHolder, position: Int) {
-        val personaje = personajes[position]
-        holder.txtName.text = personaje.name
-        holder.txtSpecie.text = personaje.species
-        holder.txtGender.text = personaje.gender
-        // Usando Glide o Picasso para cargar la imagen desde una URL
-        Glide.with(holder.itemView.context).load(personaje.image).into(holder.characterImage)
+        val personaje: Personaje = personajes[position]
+        holder.bind(personaje)
     }
 
     override fun getItemCount(): Int {
         return personajes.size
     }
+
 }

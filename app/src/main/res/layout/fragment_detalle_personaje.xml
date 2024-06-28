@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".presentation.view.DetallePersonajeFragment">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/volverPersonajes"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:title="PERSONAJE"
+        android:background="@color/white"
+        app:titleCentered="true"
+        app:navigationIcon="?attr/homeAsUpIndicator"
+        app:navigationIconTint="@color/black"
+        />
+
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/character_image"
+            android:layout_width="0dp"
+            android:layout_height="350dp"
+            android:layout_marginTop="5dp"
+            android:background="@color/black"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txt_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="nombre"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="@+id/character_image"
+            app:layout_constraintStart_toStartOf="@+id/character_image"
+            app:layout_constraintTop_toBottomOf="@+id/character_image" />
+
+        <TextView
+            android:id="@+id/txt_specie"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="specie"
+            android:textSize="20sp"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="@+id/txt_name"
+            app:layout_constraintStart_toStartOf="@+id/txt_name"
+            app:layout_constraintTop_toBottomOf="@+id/txt_name" />
+
+        <TextView
+            android:id="@+id/txt_gender"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="gender"
+            android:textSize="20sp"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="@+id/txt_specie"
+            app:layout_constraintStart_toStartOf="@+id/txt_specie"
+            app:layout_constraintTop_toBottomOf="@+id/txt_specie"
+            />
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

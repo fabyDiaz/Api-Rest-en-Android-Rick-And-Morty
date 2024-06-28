@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/personajesFragment">
+
+    <fragment
+        android:id="@+id/personajesFragment"
+        android:name="com.example.rickandmorty.presentation.view.PersonajesFragment"
+        android:label="fragment_personajes"
+        tools:layout="@layout/fragment_personajes" >
+        <action
+            android:id="@+id/action_personajesFragment_to_detallePersonajeFragment"
+            app:destination="@id/detallePersonajeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detallePersonajeFragment"
+        android:name="com.example.rickandmorty.presentation.view.DetallePersonajeFragment"
+        android:label="fragment_detalle_personaje"
+        tools:layout="@layout/fragment_detalle_personaje" >
+        <action
+            android:id="@+id/action_detallePersonajeFragment_to_personajesFragment"
+            app:destination="@id/personajesFragment" />
+    </fragment>
+</navigation>
